@@ -12,8 +12,16 @@ export default function EventForm(props) {
         <input type="text" name="description" values={props.description} />
       </label>
       <label>
-        Date:
-        <input type="date" name="date" values={props.date} />
+        Image(URL):
+        <input type="text" name="image" values={props.image} />
+      </label>
+      <label>
+        Start Date:
+        <input type="date" name="startdate" values={props.startdate} />
+      </label>
+      <label>
+        End Date:
+        <input type="date" name="enddate" values={props.enddate} />
       </label>
       <button type="submit">Add</button>
   </form>)
