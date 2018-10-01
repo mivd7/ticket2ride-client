@@ -23,9 +23,11 @@ class EventDetailsContainer extends React.PureComponent {
     this.setState({
       editMode: true,
       formValues: {
-        name: this.props.event.name,
-        date: this.props.event.date,
-        description: this.props.event.description
+        name: '',
+        description: '',
+        image: '',
+        startdate: '',
+        enddate: ''
       }
     })
   }

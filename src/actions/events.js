@@ -66,7 +66,7 @@ export const loadEvent = (id) => (dispatch, getState) => {
 
 export const updateEvent = (id, data) => dispatch => {
   request
-    .patch(`${baseUrl}/events/${id}`)
+    .put(`${baseUrl}/events/${id}`)
     .send(data)
     .then(response => {
       dispatch(eventUpdateSuccess(response.body))
