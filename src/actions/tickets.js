@@ -33,12 +33,11 @@ const ticketCreateSuccess = ticket => ({
   ticket
 })
 
-export const getTicketByEvent = (eventId) => dispatch => {
-  request
-    .get(`${baseUrl}/events/${eventId}/tickets`)
+export const getTicketsByEvent = (eventId) => dispatch => {
+  request(`${baseUrl}/events/${eventId}/tickets`)
     .then(response => {
-            dispatch(ticketFetched(response.body['tickets']))
-          })
+      dispatch(ticketsFetched(response.body))
+    })
     .catch(console.error)
 }
 

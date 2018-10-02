@@ -1,8 +1,9 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import EventDetails from './EventDetails'
-import TicketFormContainer from '../tickets/TicketFormContainer'
+import TicketListContainer from '../tickets/TicketListContainer'
 import {loadEvent, updateEvent, deleteEvent} from '../../actions/events'
+import {getTicketsByEvent} from '../../actions/tickets'
 
 class EventDetailsContainer extends React.PureComponent {
   state = {
@@ -11,6 +12,7 @@ class EventDetailsContainer extends React.PureComponent {
 
   componentDidMount() {
     this.props.loadEvent(Number(this.props.match.params.id))
+    this.props.getTicketsByEvent(Number(this.props.match.params.id))
   }
 
   onDelete = () => {
@@ -53,6 +55,7 @@ class EventDetailsContainer extends React.PureComponent {
 
   render() {
     console.log(this.props.event)
+    console.log(this.props.tickets)
     return(
           <div>
           <EventDetails event={this.props.event}
@@ -62,13 +65,14 @@ class EventDetailsContainer extends React.PureComponent {
                          onEdit={this.onEdit}
                          editMode={this.state.editMode}
                          formValues={this.state.formValues}/>
-          <TicketFormContainer />
+          <TicketListContainer />
           </div>)
   }
 }
 
 const mapStateToProps = state => ({
-  event: state.event
+  event: state.event,
+  tickets: state.tickets
 })
 
-export default connect(mapStateToProps, {loadEvent, updateEvent, deleteEvent})(EventDetailsContainer)
+export default connect(mapStateToProps, {loadEvent, updateEvent, deleteEvent, getTicketsByEvent})(EventDetailsContainer)
