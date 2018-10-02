@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import EventDetails from './EventDetails'
+import TicketFormContainer from '../tickets/TicketFormContainer'
 import {loadEvent, updateEvent, deleteEvent} from '../../actions/events'
 
 class EventDetailsContainer extends React.PureComponent {
@@ -52,14 +53,17 @@ class EventDetailsContainer extends React.PureComponent {
 
   render() {
     console.log(this.props.event)
-    console.log(this.state.formValues)
-    return <EventDetails event={this.props.event}
+    return(
+          <div>
+          <EventDetails event={this.props.event}
                          onDelete={this.onDelete}
                          onSubmit={this.onSubmit}
                          onChange={this.onChange}
                          onEdit={this.onEdit}
                          editMode={this.state.editMode}
                          formValues={this.state.formValues}/>
+          <TicketFormContainer />
+          </div>)
   }
 }
 
