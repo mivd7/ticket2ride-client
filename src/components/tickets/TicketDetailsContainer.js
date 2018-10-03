@@ -1,8 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import TicketDetails from './TicketDetails'
-// import CommeListContainer from '../tickets/TicketListContainer'
-// import TicketFormContainer from '../tickets/TicketFormContainer'
+import Comments from './Comments'
+import CommentBoxContainer from './CommentBoxContainer'
 import {loadTicket, updateTicket, deleteTicket} from '../../actions/tickets'
 import {getCommentsByTicket} from '../../actions/comments'
 
@@ -14,18 +14,24 @@ class TicketDetailsContainer extends React.PureComponent {
   componentDidMount() {
     console.log(this.props.match.params.id)
     this.props.loadTicket(Number(this.props.match.params.id))
+    this.props.getCommentsByTicket(Number(this.props.match.params.id))
   }
 
   render() {
     console.log(this.props.ticket)
-
-    return( <TicketDetails ticket={this.props.ticket}
-                     onDelete={this.onDelete}
-                     onSubmit={this.onSubmit}
-                     onChange={this.onChange}
-                     onEdit={this.onEdit}
-                     editMode={this.state.editMode}
-                     formValues={this.state.formValues} /> )
+    console.log(this.props.comments)
+    return(<div>
+              <TicketDetails ticket={this.props.ticket}
+                             onDelete={this.onDelete}
+                             onSubmit={this.onSubmit}
+                             onChange={this.onChange}
+                             onEdit={this.onEdit}
+                             editMode={this.state.editMode}
+                             formValues={this.state.formValues} />
+              <h3>Comments</h3>
+              <Comments comments={this.props.comments} />
+              <CommentBoxContainer ticketId={this.props.match.params.id} />
+            </div> )
   }
 }
 
