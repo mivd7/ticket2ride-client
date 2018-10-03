@@ -18,9 +18,7 @@ class TicketDetailsContainer extends React.PureComponent {
   }
 
   render() {
-    console.log(this.props.ticket)
-    console.log(this.props.comments)
-    return(<div>
+      return(<div>
               <TicketDetails ticket={this.props.ticket}
                              onDelete={this.onDelete}
                              onSubmit={this.onSubmit}

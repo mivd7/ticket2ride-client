@@ -23,7 +23,8 @@ class CommentBoxContainer extends React.PureComponent {
   }
 
   render() {
-    return (<CommentBox
+    return (
+    <CommentBox
       onSubmit={this.onSubmit}
       onChange={this.onChange}
       values={this.state}

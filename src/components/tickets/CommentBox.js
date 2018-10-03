@@ -1,7 +1,6 @@
 import * as React from 'react'
 
 export default function CommentBox(props) {
-  console.log(props.message)
   return (
       <div>
         <form onSubmit={props.onSubmit} onChange={props.onChange} >
