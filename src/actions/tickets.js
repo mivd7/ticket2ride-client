@@ -41,9 +41,9 @@ export const getTicketsByEvent = (eventId) => dispatch => {
     .catch(console.error)
 }
 
-export const createTicket = (data) => dispatch => {
+export const createTicket = (data, eventId) => dispatch => {
   request
-    .post(`${baseUrl}/tickets`)
+    .post(`${baseUrl}/events/${eventId}/tickets`)
     .send(data)
     .then(response => {
       dispatch(ticketCreateSuccess(response.body))

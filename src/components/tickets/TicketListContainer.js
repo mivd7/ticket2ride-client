@@ -4,13 +4,12 @@ import {connect} from 'react-redux'
 import TicketList from './TicketList'
 
 class TicketsListContainer extends React.PureComponent {
-  componentDidMount() {
-    this.props.getTicketsByEvent(1)
-  }
+  // componentDidMount() {
+  //   this.props.getTicketsByEvent(1)
+  // }
 
   render() {
     console.log(this.props.tickets)
-    // console.log(Number(this.props.match.params.id))
     return (
         <div>
            <h1>Available Tickets</h1>

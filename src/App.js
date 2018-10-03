@@ -4,7 +4,7 @@ import {Provider} from 'react-redux'
 import { Route } from 'react-router-dom'
 import EventDetailsContainer from './components/events/EventDetailsContainer'
 import EventsListContainer from './components/events/EventsListContainer'
-// import TicketListContainer from './components/tickets/TicketListContainer'
+// import TicketFormContainer from './components/tickets/TicketFormContainer'
 
 class App extends Component {
   render() {

@@ -23,12 +23,11 @@ class TicketFormContainer extends React.PureComponent {
       price: '',
       thumbnail: ''
     })
-    this.props.createTicket(this.state)
+    this.props.createTicket(this.state, this.props.eventId)
   }
 
   render() {
-    return (
-      <TicketForm
+    return (<TicketForm
       onSubmit={this.onSubmit}
       onChange={this.onChange}
       values={this.state}

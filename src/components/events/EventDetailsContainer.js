@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import EventDetails from './EventDetails'
 import TicketListContainer from '../tickets/TicketListContainer'
+import TicketFormContainer from '../tickets/TicketFormContainer'
 import {loadEvent, updateEvent, deleteEvent} from '../../actions/events'
 import {getTicketsByEvent} from '../../actions/tickets'
 
@@ -11,6 +12,8 @@ class EventDetailsContainer extends React.PureComponent {
   }
 
   componentDidMount() {
+    const tickets = this.props.tickets
+    console.log(tickets)
     this.props.loadEvent(Number(this.props.match.params.id))
     this.props.getTicketsByEvent(Number(this.props.match.params.id))
   }
@@ -53,9 +56,11 @@ class EventDetailsContainer extends React.PureComponent {
     this.props.updateEvent(this.props.event.id, this.state.formValues)
   }
 
+
   render() {
-    console.log(this.props.event)
     console.log(this.props.tickets)
+    console.log(this.props.match.params.id)
+    // { name: 'cherries', quantity: 5 }
     return(
           <div>
           <EventDetails event={this.props.event}
@@ -66,7 +71,8 @@ class EventDetailsContainer extends React.PureComponent {
                          editMode={this.state.editMode}
                          formValues={this.state.formValues}/>
           <TicketListContainer />
-          </div>)
+          <TicketFormContainer eventId={this.props.match.params.id} tickets={this.props.tickets}/>
+          </div> )
   }
 }
 

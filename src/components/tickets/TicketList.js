@@ -1,6 +1,5 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import TicketFormContainer from './TicketFormContainer'
 
 export default function TicketsList(props) {
   if (!props.tickets) return 'loading'
@@ -12,8 +11,6 @@ export default function TicketsList(props) {
         )) }
         { !props.tickets && <li>Loading tickets...</li> }
       </ul>
-
-      <TicketFormContainer />
     </div>
   )
 }
