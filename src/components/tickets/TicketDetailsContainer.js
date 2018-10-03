@@ -28,7 +28,7 @@ class TicketDetailsContainer extends React.PureComponent {
                              onEdit={this.onEdit}
                              editMode={this.state.editMode}
                              formValues={this.state.formValues} />
-              <h3>Comments</h3>
+              <h2>Comments</h2>
               <Comments comments={this.props.comments} />
               <CommentBoxContainer ticketId={this.props.match.params.id} />
             </div> )

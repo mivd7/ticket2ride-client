@@ -1,12 +1,15 @@
 import * as React from 'react'
 
-export default function TicketForm(props) {
+export default function CommentBox(props) {
+  console.log(props.message)
   return (
-    <form onSubmit={props.onSubmit} onChange={props.onChange}>
-      <label>
-        Message:
-        <input type="text" name="message" values={props.message} />
-      </label>
-      <button type="submit">Add Comment</button>
-   </form> )
+      <div>
+        <form onSubmit={props.onSubmit} onChange={props.onChange} >
+          <h3>Add a comment:
+          <br />
+            <textarea type="text" name="message" value={props.message} />
+          </h3>
+          <button type="submit">Add Comment</button>
+        </form>
+      </div>)
 }
