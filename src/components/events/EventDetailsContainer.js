@@ -11,9 +11,8 @@ class EventDetailsContainer extends React.PureComponent {
     editMode: false
   }
 
-  componentDidMount() {
-    const tickets = this.props.tickets
-    console.log(tickets)
+  componentWillMount() {
+    console.log(this.props)
     this.props.loadEvent(Number(this.props.match.params.id))
     this.props.getTicketsByEvent(Number(this.props.match.params.id))
   }
@@ -58,7 +57,7 @@ class EventDetailsContainer extends React.PureComponent {
 
 
   render() {
-    console.log(this.props.tickets)
+    console.log(this.props.event)
     return(
           <div>
           <EventDetails event={this.props.event}
@@ -68,8 +67,8 @@ class EventDetailsContainer extends React.PureComponent {
                          onEdit={this.onEdit}
                          editMode={this.state.editMode}
                          formValues={this.state.formValues}/>
-          <TicketListContainer />
-          <TicketFormContainer eventId={this.props.match.params.id} tickets={this.props.tickets}/>
+          <TicketListContainer eventId={this.props.match.params.id} />
+          <TicketFormContainer eventId={this.props.match.params.id} />
           </div> )
   }
 }
