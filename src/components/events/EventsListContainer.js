@@ -9,7 +9,6 @@ class EventsListContainer extends React.PureComponent {
   }
 
   render() {
-    console.log(this.props.events)
     return (
         <div>
            <h1>Upcoming Events</h1>

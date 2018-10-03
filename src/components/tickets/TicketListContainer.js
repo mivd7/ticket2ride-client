@@ -9,7 +9,6 @@ class TicketsListContainer extends React.PureComponent {
   // }
 
   render() {
-    console.log(this.props.tickets)
     return (
         <div>
            <h1>Available Tickets</h1>

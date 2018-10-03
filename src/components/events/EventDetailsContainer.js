@@ -59,8 +59,6 @@ class EventDetailsContainer extends React.PureComponent {
 
   render() {
     console.log(this.props.tickets)
-    console.log(this.props.match.params.id)
-    // { name: 'cherries', quantity: 5 }
     return(
           <div>
           <EventDetails event={this.props.event}
