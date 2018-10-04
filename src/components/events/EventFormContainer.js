@@ -31,11 +31,12 @@ class EventFormContainer extends React.PureComponent {
   }
 
   render() {
-    return (<EventForm
-      onSubmit={this.onSubmit}
-      onChange={this.onChange}
-      values={this.state}
-    />)
+    return (<div>
+            <h3>Add an event</h3>
+              <EventForm onSubmit={this.onSubmit}
+                      onChange={this.onChange}
+                      values={this.state} />
+            </div>)
   }
 }
 
