@@ -11,6 +11,7 @@ class LoginPage extends PureComponent {
 	}
 
 	render() {
+		console.log(this.props)
 		if (this.props.currentUser) return (
 			<Redirect to="/" />
 		)
@@ -24,7 +25,7 @@ class LoginPage extends PureComponent {
 
 					{ this.props.error && <span style={{color:'red'}}>{this.props.error}</span> }
 
-					not a user? <Link to='/signup' ><p>singup</p></Link>
+					not a user? <Link to='/signup' ><p>Sign Up!</p></Link>
 
 				</div>
 			</div>

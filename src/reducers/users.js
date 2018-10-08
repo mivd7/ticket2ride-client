@@ -1,11 +1,11 @@
-import {ADD_USER, UPDATE_USER, UPDATE_USERS} from '../actions/users'
+import {ADD_USER, UPDATE_USER, UPDATE_USERS, CONNECTED_USER} from '../actions/users'
 import {USER_LOGOUT} from '../actions/users'
 
 /*
 The state will contain the users in an object with the game ID as key
 */
 
-export default (state = null, {type, payload}) => {
+export default (state = {}, {type, payload}) => {
   switch (type) {
     case USER_LOGOUT:
       return null
@@ -28,6 +28,9 @@ export default (state = null, {type, payload}) => {
         return users
       }, {})
 
+    case CONNECTED_USER:
+      return payload
+      
     default:
       return state
   }

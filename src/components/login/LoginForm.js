@@ -18,6 +18,7 @@ export default class LoginForm extends PureComponent {
   	}
 
 	render() {
+		console.log(this.props.user)
 		return (
       		<div className="login-form">
 				<Form onSubmit={this.handleSubmit} horizontal>
@@ -27,7 +28,7 @@ export default class LoginForm extends PureComponent {
 						</Col>
 						<Col sm={9}>
 							<FormControl type="email" name="email"
-								value={ this.state.email || ''} 
+								value={ this.state.email || ''}
 								onChange={ this.handleChange } />
 						</Col>
 					</FormGroup>

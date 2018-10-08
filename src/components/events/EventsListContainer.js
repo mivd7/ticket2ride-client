@@ -10,10 +10,7 @@ class EventsListContainer extends React.PureComponent {
 
   render() {
     return (
-        <div>
-           <h1>Upcoming Events</h1>
-           <EventsList events={this.props.events} />
-        </div>
+      <EventsList events={this.props.events} />
   )}
 }
 

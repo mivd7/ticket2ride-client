@@ -23,7 +23,7 @@ class SignupPage extends PureComponent {
 
 					<p style={{color:'red'}}>{ this.props.signup.error }</p>
 
-					already a member? <Link to='/login' ><p>to login</p></Link>
+				 	<Link to='/login' ><p>Or login</p></Link>
 				</div>
 			</div>
 		);
