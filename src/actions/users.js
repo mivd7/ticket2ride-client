@@ -1,9 +1,10 @@
 import * as request from 'superagent';
-
-//establish connection with socket io
-
+import io from 'socket.io-client'
+import {baseUrl} from '../constants'
 
 export const ADD_USER = 'ADD_USER';
+export const SET_USER = 'SET_USER';
+
 export const UPDATE_USER = 'UPDATE_USER';
 export const UPDATE_USERS = 'UPDATE_USERS';
 
@@ -17,7 +18,6 @@ export const USER_SIGNUP_FAILED = 'USER_SIGNUP_FAILED';
 
 export const CONNECTED_USER = 'CONNECTED_USER'
 
-const baseUrl = 'http://localhost:4000'
 
 export const logout = () => ({
   type: USER_LOGOUT
@@ -47,9 +47,9 @@ const updateUsers = (users) => ({
   payload: users
 });
 
-const connectedUser = (user) => ({
+const connectedUser = (currentUser) => ({
   type: CONNECTED_USER,
-  payload: user
+  payload: currentUser
 })
 
 export const login = (email, password) => (dispatch) =>
@@ -91,9 +91,11 @@ export const getUsers = () => (dispatch) => {
 };
 
 export const getUser = (id) => (dispatch) => {
-  request
-    .get(`${baseUrl}/users/${id}`)
-    .then(result => dispatch(connectedUser(result.body)))
-    .catch(err => console.error(err))
-}
+    request(`${baseUrl}/users/${id}`)
+      .then(response => {
+        dispatch(connectedUser(response.body))
+      })
+      .catch(console.error)
+  }
+
 //set user voert middels een connectie met Socket IO
