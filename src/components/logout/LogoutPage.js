@@ -10,7 +10,7 @@ class LogoutPage extends PureComponent {
 
 	render() {
 		if (!this.props.currentUser) return (
-			<Redirect to="/login" />
+			<Redirect to="/" />
 		)
 
 		return (

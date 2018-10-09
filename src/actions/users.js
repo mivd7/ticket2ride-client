@@ -17,7 +17,6 @@ export const USER_SIGNUP_FAILED = 'USER_SIGNUP_FAILED';
 
 export const CONNECTED_USER = 'CONNECTED_USER'
 
-
 export const logout = () => ({
   type: USER_LOGOUT
 });

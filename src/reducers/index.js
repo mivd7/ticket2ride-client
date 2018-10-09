@@ -7,6 +7,7 @@ import users from './users'
 import signup from './signup'
 import currentUser from './currentUser'
 import login from './login'
+import {reducer as menu} from 'redux-burger-menu'
 
 export default {
   events,
@@ -17,5 +18,6 @@ export default {
   users,
   currentUser,
   login,
-  signup
+  signup,
+  menu
 }

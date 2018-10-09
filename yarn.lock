@@ -7109,6 +7109,11 @@ reduce-function-call@^1.0.1:
   dependencies:
     balanced-match "^0.4.2"
 
+redux-burger-menu@^0.2.8:
+  version "0.2.8"
+  resolved "https://registry.yarnpkg.com/redux-burger-menu/-/redux-burger-menu-0.2.8.tgz#3d487a708ac360ddd55817580cac9e6a0a8db154"
+  integrity sha512-hzMPsmKF0QcMFYU/u/yC8Du0f0tZh3O88Usm1GI9h/xLTNGm248PEuCsVN6JCKHhdSTYt33d9Ir3edzHQGrqaw==
+
 regenerate@^1.2.1:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/regenerate/-/regenerate-1.4.0.tgz#4a856ec4b56e4077c557589cae85e7a4c8869a11"

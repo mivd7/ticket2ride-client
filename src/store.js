@@ -19,9 +19,8 @@ const store = createStore(reducer, enhancer)
 
 // when JWT was coming from localStorage, connect via websockets
 const initialCurrentUser = store.getState().currentUser
-
 if (initialCurrentUser) {
-  socket.connect(store.dispatch, initialCurrentUser.jwt)
+  socket.connect(store.dispatch, initialCurrentUser)
 }
 
 export default store
