@@ -1,11 +1,12 @@
-import {USER_LOGIN_SUCCESS, USER_LOGOUT} from '../actions/users'
+import {USER_LOGIN_SUCCESS, USER_LOGOUT, SET_USER} from '../actions/users'
 import {localStorageJwtKey} from '../constants'
 
 let initialState = null
 try {
   const jwt = localStorage.getItem(localStorageJwtKey)
   if (jwt) {
-    initialState = { jwt }
+    initialState = { jwt: jwt,
+                     user: {} }
   }
 }
 catch (e) {
@@ -16,6 +17,9 @@ export default function (state = initialState, {type, payload}) {
 	switch (type) {
 		case USER_LOGIN_SUCCESS:
 			return payload
+
+    // case SET_USER:
+    //   return payload
 
     case USER_LOGOUT:
       return null
