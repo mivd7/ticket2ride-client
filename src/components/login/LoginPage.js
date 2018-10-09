@@ -24,8 +24,8 @@ class LoginPage extends PureComponent {
 					<LoginForm onSubmit={this.handleSubmit} />
 
 					{ this.props.error && <span style={{color:'red'}}>{this.props.error}</span> }
-
-					not a user? <Link to='/signup' ><p>Sign Up!</p></Link>
+					<br />
+					Not yet a user? <Link to='/signup' ><p>Sign Up!</p></Link>
 
 				</div>
 			</div>

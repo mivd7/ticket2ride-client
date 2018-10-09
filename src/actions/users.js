@@ -1,5 +1,4 @@
 import * as request from 'superagent';
-import io from 'socket.io-client'
 import {baseUrl} from '../constants'
 
 export const ADD_USER = 'ADD_USER';
@@ -47,9 +46,9 @@ const updateUsers = (users) => ({
   payload: users
 });
 
-const connectedUser = (currentUser) => ({
+const connectedUser = (user) => ({
   type: CONNECTED_USER,
-  payload: currentUser
+  payload: user
 })
 
 export const login = (email, password) => (dispatch) =>
@@ -91,7 +90,8 @@ export const getUsers = () => (dispatch) => {
 };
 
 export const getUser = (id) => (dispatch) => {
-    request(`${baseUrl}/users/${id}`)
+    request
+      .get(`${baseUrl}/users/${id}`)
       .then(response => {
         dispatch(connectedUser(response.body))
       })

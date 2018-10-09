@@ -9,7 +9,7 @@ import LoginPage from './components/login/LoginPage'
 import LogoutPage from './components/logout/LogoutPage'
 import SignupPage from './components/signup/SignupPage'
 import "./styles.css";
-import TopBar from './auth/topbar'
+// import TopBar from './auth/topbar'
 
 class App extends Component {
   render() {
@@ -17,7 +17,7 @@ class App extends Component {
       <Provider store={store}>
         <div className="App">
         <div className="App-header">
-            <TopBar />
+          <h1>TICKET 2 RIDE</h1>
         </div>
           <main>
             <Route exact path="/login" component={LoginPage} />

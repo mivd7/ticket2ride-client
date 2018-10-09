@@ -9,7 +9,6 @@ export default class SocketIO {
     console.log('Connecting websocket')
     this.socket = io.connect(baseUrl, {
       query: `auth_token=${jwt}`,
-      user: 'user'
     });
     this.socket.on('action', payload => dispatch(payload))
 
