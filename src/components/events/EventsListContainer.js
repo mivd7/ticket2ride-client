@@ -9,6 +9,7 @@ class EventsListContainer extends React.PureComponent {
   }
 
   render() {
+    console.log(this.props.events)
     return (<div>
       <EventsList events={this.props.events} />
       </div>

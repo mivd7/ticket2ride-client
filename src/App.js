@@ -26,6 +26,8 @@ class App extends Component {
             <Route path="/" exact component={EventsListContainer} />
             <Route path="/events/:id" component={EventDetailsContainer} />
             <Route path="/tickets/:id" component={TicketDetailsContainer} />
+            <br />
+            <iframe title="beatles" width="560" height="315" src="https://www.youtube.com/embed/SyNt5zm3U_M" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
           </main>
         </div>
       </Provider>
