@@ -11,6 +11,7 @@ class TopBar extends React.Component {
       return (<div>
             <h1>TICKET 2 RIDE</h1>
             <p>Welcome back, {this.props.currentUser.user.firstName}!</p>
+            <button><Link to={'/'}>Home</Link></button>
             <button><Link to={'/logout'}>Logout</Link></button>
             </div>)
 
