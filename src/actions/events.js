@@ -1,4 +1,6 @@
 import request from 'superagent'
+import {isExpired} from '../auth/jwt'
+import {logout} from './users'
 
 export const EVENTS_FETCHED = 'EVENTS_FETCHED'
 export const EVENT_FETCHED = 'EVENT_FETCHED'
@@ -64,9 +66,34 @@ export const loadEvent = (id) => (dispatch, getState) => {
     .catch(console.error)
 }
 
-export const updateEvent = (id, data) => dispatch => {
+// export const createEvent = (eventId, description, price, thumbnail) => (dispatch, getState) => {
+//
+//     const state = getState();
+//     if (!state.currentUser) return null;
+//     const jwt = state.currentUser.jwt;
+//     if (isExpired(jwt)) return dispatch(logout());
+//
+//     request
+//       .post(`${baseUrl}/events/${eventId}/Events`)
+//       .set('Authorization', `Bearer ${jwt}`)
+//       .send({ description, price, thumbnail })
+//       .then(result => {
+//           dispatch(EventCreateSuccess(result.body)) ;
+//           // dispatch(updateCustomers(result.body.custommerPayload));
+//
+//     })
+//       .catch(err => console.error(err))
+// }
+
+export const updateEvent = (id, data) => (dispatch, getState) => {
+  const state = getState();
+  if (!state.currentUser) return null;
+  const jwt = state.currentUser.jwt;
+  if (isExpired(jwt)) return dispatch(logout())
+
   request
-    .put(`${baseUrl}/events/${id}`)
+    .set('Authorization', `Bearer ${jwt}`)
+    .put(`${baseUrl}/Events/${id}`)
     .send(data)
     .then(response => {
       dispatch(eventUpdateSuccess(response.body))
@@ -74,9 +101,15 @@ export const updateEvent = (id, data) => dispatch => {
     .catch(console.error)
 }
 
-export const deleteEvent = id => dispatch => {
+export const deleteEvent = id => (dispatch, getState) => {
+  const state = getState();
+  if (!state.currentUser) return null;
+  const jwt = state.currentUser.jwt;
+  if (isExpired(jwt)) return dispatch(logout())
+
   request
-    .delete(`${baseUrl}/events/${id}`)
+    .set('Authorization', `Bearer ${jwt}`)
+    .delete(`${baseUrl}/Events/${id}`)
     .then(response => {
       dispatch(eventDeleteSuccess(id))
     })

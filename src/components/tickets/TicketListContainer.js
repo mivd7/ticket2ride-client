@@ -1,5 +1,5 @@
 import React from 'react'
-import {getTicketsByEvent} from '../../actions/tickets'
+// import {getTicketsByEvent} from '../../actions/tickets'
 import {connect} from 'react-redux'
 import TicketList from './TicketList'
 // import {Link} from 'react-router-dom'
@@ -21,7 +21,7 @@ class TicketsListContainer extends React.PureComponent {
   return (
       <div>
          <h1>Available Tickets</h1>
-         <TicketList tickets={this.props.tickets} eventId={this.props.eventId} />
+         <TicketList ticketData={this.props.tickets} eventId={this.props.eventId} />
       </div>
     )}
 }
@@ -30,4 +30,4 @@ const mapStateToProps = state => ({
   tickets: state.tickets
 })
 
-export default connect(mapStateToProps, {getTicketsByEvent})(TicketsListContainer)
+export default connect(mapStateToProps, null)(TicketsListContainer)

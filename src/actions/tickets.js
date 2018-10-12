@@ -63,9 +63,13 @@ export const createTicket = (eventId, description, price, thumbnail) => (dispatc
 }
 
 export const loadTickets = () => (dispatch, getState) => {
-  if (getState().tickets) return
+  const state = getState();
+  if (!state.currentUser) return null;
+  const jwt = state.currentUser.jwt;
+  if (isExpired(jwt)) return dispatch(logout());
 
   request(`${baseUrl}/tickets`)
+    .set('Authorization', `Bearer ${jwt}`)
     .then(response => {
       dispatch(ticketsFetched(response.body))
     })
@@ -73,18 +77,27 @@ export const loadTickets = () => (dispatch, getState) => {
 }
 
 export const loadTicket = (id) => (dispatch, getState) => {
-  const state = getState().ticket
-  if (state && state.id === id) return
+  const state = getState();
+  if (!state.currentUser) return null;
+  const jwt = state.currentUser.jwt;
+  if (isExpired(jwt)) return dispatch(logout());
 
   request(`${baseUrl}/tickets/${id}`)
+    .set('Authorization', `Bearer ${jwt}`)
     .then(response => {
       dispatch(ticketFetched(response.body))
     })
     .catch(console.error)
 }
 
-export const updateTicket = (id, data) => dispatch => {
+export const updateTicket = (id, data) => (dispatch, getState) => {
+  const state = getState();
+  if (!state.currentUser) return null;
+  const jwt = state.currentUser.jwt;
+  if (isExpired(jwt)) return dispatch(logout())
+
   request
+    .set('Authorization', `Bearer ${jwt}`)
     .put(`${baseUrl}/tickets/${id}`)
     .send(data)
     .then(response => {
@@ -93,8 +106,14 @@ export const updateTicket = (id, data) => dispatch => {
     .catch(console.error)
 }
 
-export const deleteTicket = id => dispatch => {
+export const deleteTicket = id => (dispatch, getState) => {
+  const state = getState();
+  if (!state.currentUser) return null;
+  const jwt = state.currentUser.jwt;
+  if (isExpired(jwt)) return dispatch(logout())
+
   request
+    .set('Authorization', `Bearer ${jwt}`)
     .delete(`${baseUrl}/tickets/${id}`)
     .then(response => {
       dispatch(ticketDeleteSuccess(id))

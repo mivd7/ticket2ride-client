@@ -2,6 +2,7 @@ import * as React from 'react'
 import TicketForm from './TicketForm'
 
 export default function TicketDetails(props) {
+  console.log(props)
   if (!props.ticket) return 'loading'
   return (<div>
           {props.editMode && <TicketForm onSubmit={props.onSubmit} onChange={props.onChange} values={props.formValues} /> }

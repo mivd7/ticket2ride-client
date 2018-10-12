@@ -4,19 +4,15 @@ import React from 'react'
 // import TicketForm from './TicketForm'
 
 export default class TicketFormContainer extends React.PureComponent {
-  state = {
-    description: '',
-    price: '',
-    thumbnail: ''
-  }
+  state = {}
 
 	handleSubmit = (e) => {
 		e.preventDefault();
-    this.setState({
-      description: '',
-      price: '',
-      thumbnail: ''
-    })
+    // this.setState({
+    //   description: '',
+    //   price: '',
+    //   thumbnail: ''
+    // })
 		this.props.onSubmit(this.state);
 	}
 

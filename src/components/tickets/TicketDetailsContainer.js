@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 import TicketDetails from './TicketDetails'
 import Comments from './Comments'
 import CommentBoxContainer from './CommentBoxContainer'
@@ -22,19 +23,16 @@ class TicketDetailsContainer extends React.PureComponent {
   }
 
   componentDidMount() {
-    console.log(this.props.match.params.id)
+
     this.props.loadTicket(Number(this.props.match.params.id))
     this.props.getCommentsByTicket(Number(this.props.match.params.id))
+
   }
 
   render() {
-    // const averagePrice = Object.values(tickets)
-    //   .reduce((acc, currentticket) => {
-    //     return  acc + currentticket.price },0) / Object.values(tickets).length;
-    //
-    // const risk = ticketRisk(customers[ticket.user_id].tickets_offered,
-    //   ticket.price,avgPrice,ticket.time_of_creation,ticketsInfo[ticket.id].comments_received)
-
+    console.log(this.props.ticket)
+    // const userTicket = this.props.ticket.map(ticket => ticket.user_id)
+    // console.log(userTicket)
     if (this.props.currentUser !== null)
       return(<div>
               <TicketDetails ticket={this.props.ticket}
@@ -48,14 +46,19 @@ class TicketDetailsContainer extends React.PureComponent {
               <Comments comments={this.props.comments} />
               <CommentBoxContainer ticketId={this.props.match.params.id} />
             </div> )
-
-      return( <TicketDetails ticket={this.props.ticket}
-                     onDelete={this.onDelete}
-                     onSubmit={this.onSubmit}
-                     onChange={this.onChange}
-                     onEdit={this.onEdit}
-                     editMode={this.state.editMode}
-                     formValues={this.state.formValues} /> )
+        return(<div>
+                  <TicketDetails ticket={this.props.ticket}
+                               onDelete={this.onDelete}
+                               onSubmit={this.onSubmit}
+                               onChange={this.onChange}
+                               onEdit={this.onEdit}
+                               editMode={this.state.editMode}
+                               formValues={this.state.formValues}
+                            />
+                <p> Interested in this ticket and a Uber-ride 2 the venue?
+                <br />
+                <Link to={`/sign up`}>Sign up</Link> and <Link to={'/login'}>login</Link> to get your Ticket 2 Ride today!</p>
+                  </div>)
   }
 }
 

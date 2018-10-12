@@ -57,9 +57,9 @@ class EventDetailsContainer extends React.PureComponent {
 
   formSubmit = (data) => {
         this.props.createTicket(this.props.match.params.id, data.description, data.price, data.thumbnail);
-        this.setState({data})
-        this.props.getTicketsByEvent(this.props.match.params.id);
-  }
+        // this.setState({data})
+        // this.props.getTicketsByEvent(this.props.match.params.id);
+      }
 
 
   render() {
