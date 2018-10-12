@@ -1,0 +1,12 @@
+.eventBody {
+  background-color: #D8CEF6;
+  margin: 40px;
+  padding: 25px;
+}
+
+.eventForm {
+  border: 50px;
+  border-color: black;
+  margin: 35px;
+  padding: 15px;
+}

@@ -13,7 +13,7 @@ class EventsListContainer extends React.PureComponent {
     console.log(this.props)
     if (this.props.currentUser !== null)
     return (<div>
-      <EventsList events={this.props.events} />
+      <EventsList events={this.props.events}/>
       <EventFormContainer />
       </div>)
 

@@ -13,6 +13,13 @@ body {
   text-align: center;
 }
 
+.App-footer {
+  background-color: #E6E6E6;
+  text-align: center;
+  margin: 100px;
+  padding: 20px;
+}
+
 .Profile {
   text-align: right;
 }

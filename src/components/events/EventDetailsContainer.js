@@ -4,18 +4,18 @@ import EventDetails from './EventDetails'
 import TicketListContainer from '../tickets/TicketListContainer'
 import TicketFormContainer from '../tickets/TicketFormContainer'
 import {loadEvent, updateEvent, deleteEvent} from '../../actions/events'
-import {getTicketsByEvent} from '../../actions/tickets'
+import {getTicketsByEvent, createTicket} from '../../actions/tickets'
+import './Events.css'
 
 class EventDetailsContainer extends React.PureComponent {
   state = {
     editMode: false
   }
 
-  componentWillMount() {
-    console.log(this.props)
-    this.props.loadEvent(Number(this.props.match.params.id))
-    this.props.getTicketsByEvent(Number(this.props.match.params.id))
-  }
+  componentDidMount() {
+    this.props.getTicketsByEvent(this.props.match.params.id)
+    if (this.props.event === null) return this.props.loadEvent(Number(this.props.match.params.id))
+    }
 
   onDelete = () => {
     this.props.deleteEvent(this.props.event.id)
@@ -55,27 +55,33 @@ class EventDetailsContainer extends React.PureComponent {
     this.props.updateEvent(this.props.event.id, this.state.formValues)
   }
 
+  formSubmit = (data) => {
+        this.props.createTicket(this.props.match.params.id, data.description, data.price, data.thumbnail);
+        this.setState({data})
+        this.props.getTicketsByEvent(this.props.match.params.id);
+  }
+
 
   render() {
-    console.log(this.props.event)
-    return(
-          <div>
-          <EventDetails event={this.props.event}
+    console.log(this.props)
+      return(<div className="eventBody">
+             <EventDetails event={this.props.event}
                          onDelete={this.onDelete}
                          onSubmit={this.onSubmit}
                          onChange={this.onChange}
                          onEdit={this.onEdit}
                          editMode={this.state.editMode}
                          formValues={this.state.formValues}/>
-          <TicketListContainer eventId={this.props.match.params.id} />
-          <TicketFormContainer eventId={this.props.match.params.id} />
+            <TicketListContainer tickets={this.props.tickets} eventId={this.props.match.params.id} />
+            <TicketFormContainer onSubmit={this.formSubmit} />
           </div> )
-  }
+      }
 }
 
 const mapStateToProps = state => ({
   event: state.event,
-  tickets: state.tickets
+  tickets: state.tickets,
+  currentUser: state.currentUser
 })
 
-export default connect(mapStateToProps, {loadEvent, updateEvent, deleteEvent, getTicketsByEvent})(EventDetailsContainer)
+export default connect(mapStateToProps, {loadEvent, updateEvent, deleteEvent, getTicketsByEvent, createTicket})(EventDetailsContainer)

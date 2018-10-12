@@ -10,9 +10,6 @@ export const storeJwt = store => next => action => {
     if (action.type === USER_LOGOUT) {
       localStorage.removeItem(localStorageJwtKey)
     }
-    // if (action.type === CONNECTED_USER) {
-    //   localStorage.setItem(action.payload.user)
-    // }
   }
   catch (e) {
     console.log(`Interaction with LocalStorage went wrong`, e)
@@ -23,7 +20,7 @@ export const storeJwt = store => next => action => {
 
 export const socketIo = socketio => store => next => action => {
   if (action.type === USER_LOGIN_SUCCESS) {
-    socketio.connect(store.dispatch, action.payload)
+    socketio.connect(store.dispatch, action.payload.jwt)
   }
   if (action.type === USER_LOGOUT) {
     socketio.disconnect()

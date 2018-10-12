@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {createEvent} from '../../actions/events'
 import EventForm from './EventForm'
+import './Events.css'
 
 class EventFormContainer extends React.PureComponent {
   state = {
@@ -31,7 +32,8 @@ class EventFormContainer extends React.PureComponent {
   }
 
   render() {
-    return (<div>
+    console.log(this.onChange)
+    return (<div className="eventForm">
             <h3>Add an event</h3>
               <EventForm onSubmit={this.onSubmit}
                       onChange={this.onChange}

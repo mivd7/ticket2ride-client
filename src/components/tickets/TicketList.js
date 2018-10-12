@@ -2,6 +2,7 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 
 export default function TicketsList(props) {
+  console.log(props.tickets)
   if (!props.tickets) return 'loading'
   return (
     <div>
@@ -11,8 +12,6 @@ export default function TicketsList(props) {
           <p key={ticket.id}>€ {ticket.price}</p>
           </div>
         )) }
-        { !props.tickets && <li>Loading tickets...</li> }
       </ul>
-    </div>
-  )
+    </div>)
 }

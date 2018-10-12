@@ -26,11 +26,15 @@ class App extends Component {
             <Route path="/" exact component={EventsListContainer} />
             <Route path="/events/:id" component={EventDetailsContainer} />
             <Route path="/tickets/:id" component={TicketDetailsContainer} />
-            <p>And now...</p>
-            <iframe title="beatles" width="560" height="315" src="https://www.youtube.com/embed/SyNt5zm3U_M" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-            <br />
-            © MIVD Web Development, 2018
           </main>
+          <footer>
+            <div className="App-footer">
+              <p>And now...</p>
+              <iframe title="beatles" width="560" height="315" src="https://www.youtube.com/embed/SyNt5zm3U_M" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+              <br />
+            © MIVD Web Development, 2018
+            </div>
+          </footer>
         </div>
       </Provider>
     );
