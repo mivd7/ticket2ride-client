@@ -3,14 +3,12 @@ import TicketForm from './TicketForm'
 
 export default function TicketDetails(props) {
   console.log(props)
-  if (!props.ticket) return 'loading'
+  if (!props.ticketData || props.ticket === null) return 'loading'
   return (<div>
           {props.editMode && <TicketForm onSubmit={props.onSubmit} onChange={props.onChange} values={props.formValues} /> }
           {!props.editMode && <div>
-            <h1>{props.ticket.description}</h1>
-            <h4>€ {props.ticket.price}</h4>
-            <button onClick={props.onDelete}>Delete</button>
-            <button onClick={props.onEdit}>Edit</button>
+            <h1>{props.ticketData.description}</h1>
+            <h4>€ {props.ticketData.price}</h4>
           </div>}
           </div>)
 }

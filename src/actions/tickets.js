@@ -68,7 +68,7 @@ export const loadTickets = () => (dispatch, getState) => {
   const jwt = state.currentUser.jwt;
   if (isExpired(jwt)) return dispatch(logout());
 
-  request(`${baseUrl}/tickets`)
+  request(`${baseUrl}/tickets/`)
     .set('Authorization', `Bearer ${jwt}`)
     .then(response => {
       dispatch(ticketsFetched(response.body))
