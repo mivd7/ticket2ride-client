@@ -15,7 +15,7 @@ export const USER_LOGOUT = 'USER_LOGOUT';
 export const USER_SIGNUP_SUCCESS = 'USER_SIGNUP_SUCCESS';
 export const USER_SIGNUP_FAILED = 'USER_SIGNUP_FAILED';
 
-export const CONNECTED_USER = 'CONNECTED_USER'
+export const FETCHED_USER =  'FETCHED_USER'
 
 export const logout = () => ({
   type: USER_LOGOUT
@@ -45,8 +45,8 @@ const updateUsers = (users) => ({
   payload: users
 });
 
-const connectedUser = (user) => ({
-  type: CONNECTED_USER,
+const fetchedUser = (user) => ({
+  type: FETCHED_USER,
   payload: user
 })
 
@@ -92,7 +92,7 @@ export const getUser = (id) => (dispatch) => {
     request
       .get(`${baseUrl}/users/${id}`)
       .then(response => {
-        dispatch(connectedUser(response.body))
+        dispatch(fetchedUser(response.body))
       })
       .catch(console.error)
   }

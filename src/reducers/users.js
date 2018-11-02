@@ -1,4 +1,4 @@
-import {ADD_USER, UPDATE_USER, UPDATE_USERS, CONNECTED_USER} from '../actions/users'
+import {ADD_USER, UPDATE_USERS} from '../actions/users'
 import {USER_LOGOUT} from '../actions/users'
 
 /*
@@ -15,21 +15,16 @@ export default (state = {}, {type, payload}) => {
         ...state,
         [payload.id]: payload
       }
-
-    case UPDATE_USER:
-      return {
-        ...state,
-        [payload.id]: payload
-      }
+    // case UPDATE_USER:
+    //     const aux = {...state}
+    //     aux[payload.id] = payload
+    //     return aux
 
     case UPDATE_USERS:
       return payload.reduce((users, user) => {
         users[user.id] = user
         return users
       }, {})
-
-    case CONNECTED_USER:
-      return payload
 
     default:
       return state

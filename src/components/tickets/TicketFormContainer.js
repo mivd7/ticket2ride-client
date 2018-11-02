@@ -1,33 +1,27 @@
-import React from 'react'
-// import {connect} from 'react-redux'
-// import {createTicket} from '../../actions/tickets'
+import React, {PureComponent} from 'react';
 // import TicketForm from './TicketForm'
 
-export default class TicketFormContainer extends React.PureComponent {
-  state = {}
+export default class TicketFormContainer extends PureComponent {
+	state = {}
 
 	handleSubmit = (e) => {
 		e.preventDefault();
-    // this.setState({
-    //   description: '',
-    //   price: '',
-    //   thumbnail: ''
-    // })
 		this.props.onSubmit(this.state);
 	}
 
 	handleChange = (event) => {
+        const {name, value} = event.target;
+
         this.setState({
-          [event.target.name]: event.target.value
+            [name]: value
         });
     }
 
-  render() {
-    console.log(this.props)
+	render() {
     return (
       <div>
       <h1>Sell Your Ticket</h1>
-      <form onSubmit={this.handleSubmit} onChange={this.handleChange} >
+      <form onSubmit={this.handleSubmit} onChange={this.handleChange}>
         <label>
           Description:
           <input type="text" name="description" values={this.state.description} />
@@ -42,8 +36,6 @@ export default class TicketFormContainer extends React.PureComponent {
         </label>
         <button type="submit">Add</button>
     </form>
-    </div>)
-  }
+    </div>
+  )}
 }
-
-// export default connect(null, {createTicket})(TicketFormContainer)

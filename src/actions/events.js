@@ -1,4 +1,4 @@
-import request from 'superagent'
+import * as request from 'superagent';
 import {isExpired} from '../auth/jwt'
 import {logout} from './users'
 
@@ -35,16 +35,6 @@ const eventCreateSuccess = event => ({
   event
 })
 
-export const createEvent = (data) => dispatch => {
-  request
-    .post(`${baseUrl}/events`)
-    .send(data)
-    .then(response => {
-      dispatch(eventCreateSuccess(response.body))
-    })
-    .catch(console.error)
-}
-
 export const loadEvents = () => (dispatch, getState) => {
   if (getState().events) return
 
@@ -66,24 +56,24 @@ export const loadEvent = (id) => (dispatch, getState) => {
     .catch(console.error)
 }
 
-// export const createEvent = (eventId, description, price, thumbnail) => (dispatch, getState) => {
-//
-//     const state = getState();
-//     if (!state.currentUser) return null;
-//     const jwt = state.currentUser.jwt;
-//     if (isExpired(jwt)) return dispatch(logout());
-//
-//     request
-//       .post(`${baseUrl}/events/${eventId}/Events`)
-//       .set('Authorization', `Bearer ${jwt}`)
-//       .send({ description, price, thumbnail })
-//       .then(result => {
-//           dispatch(EventCreateSuccess(result.body)) ;
-//           // dispatch(updateCustomers(result.body.custommerPayload));
-//
-//     })
-//       .catch(err => console.error(err))
-// }
+export const createEvent = (data) => (dispatch, getState) => {
+
+    const state = getState();
+    if (!state.currentUser) return null;
+    const jwt = state.currentUser.jwt;
+    if (isExpired(jwt)) return dispatch(logout());
+
+    request
+      .post(`${baseUrl}/events`)
+      .set('Authorization', `Bearer ${jwt}`)
+      .send(data)
+      .then(result => {
+          dispatch(eventCreateSuccess(result.body)) ;
+          // dispatch(updateCustomers(result.body.customerPayload));
+
+    })
+      .catch(err => console.error(err))
+}
 
 export const updateEvent = (id, data) => (dispatch, getState) => {
   const state = getState();

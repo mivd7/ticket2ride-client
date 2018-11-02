@@ -7,6 +7,9 @@ export const TICKET_FETCHED = 'TICKET_FETCHED'
 export const TICKET_UPDATE_SUCCESS = 'TICKET_UPDATE_SUCCESS'
 export const TICKET_DELETE_SUCCESS = 'TICKET_DELETE_SUCCESS'
 export const TICKET_CREATE_SUCCESS = 'TICKET_CREATE_SUCCESS'
+export const UPDATE_PROFILE = 'UPDATE_PROFILE'
+export const UPDATE_TICKETINFO = 'UPDATE_TICKETINFO'
+export const UPDATE_TICKETS = 'UPDATE_TICKETS'
 
 const baseUrl = 'http://localhost:4000'
 
@@ -32,15 +35,35 @@ const ticketDeleteSuccess = ticketId => ({
 
 const ticketCreateSuccess = ticket => ({
   type: TICKET_CREATE_SUCCESS,
-  ticket
+  payload: ticket
 })
 
-export const getTicketsByEvent = (eventId) => dispatch => {
-  request(`${baseUrl}/events/${eventId}/tickets`)
-    .then(response => {
-      dispatch(ticketsFetched(response.body))
-    })
-    .catch(console.error)
+const updateProfile = (profile) => ({
+    type: UPDATE_PROFILE,
+    payload: profile
+});
+
+const updateTicketInfo = (ticketInfo) => ({
+    type: UPDATE_TICKETINFO,
+    payload: ticketInfo
+})
+
+const updateTickets = (tickets) => ({
+    type: UPDATE_TICKETS,
+    payload: tickets
+})
+
+export const getTicketsByEvent = (eventId) => (dispatch) => {
+
+    request
+        .get(`${baseUrl}/events/${eventId}/tickets`)
+        .then(result => {
+            dispatch(updateTickets(result.body['tickets']));
+            // dispatch(updateTicketInfo(result.body['ticketInfo']));
+            dispatch(updateProfile(result.body['profile']));
+        })
+        .catch(err => console.error(err))
+
 }
 
 export const createTicket = (eventId, description, price, thumbnail) => (dispatch, getState) => {
@@ -55,10 +78,10 @@ export const createTicket = (eventId, description, price, thumbnail) => (dispatc
       .set('Authorization', `Bearer ${jwt}`)
       .send({ description, price, thumbnail })
       .then(result => {
-          dispatch(ticketCreateSuccess(result.body)) ;
-          // dispatch(updateCustomers(result.body.custommerPayload));
-
-    })
+          dispatch(updateTicketInfo(result.body['ticketsInfo']))
+          dispatch(ticketCreateSuccess(result.body.ticketPayload)) ;
+          dispatch(updateProfile(result.body.profilePayload));
+        })
       .catch(err => console.error(err))
 }
 

@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom'
 import TicketDetails from './TicketDetails'
 import Comments from './Comments'
 import CommentBoxContainer from './CommentBoxContainer'
-import {loadTicket, updateTicket, deleteTicket} from '../../actions/tickets'
+import {getTicketsByEvent, loadTicket} from '../../actions/tickets'
 import {getCommentsByTicket} from '../../actions/comments'
 import {getUser} from '../../actions/users'
 import {loadEvent} from '../../actions/events'
@@ -20,72 +20,37 @@ import {loadEvent} from '../../actions/events'
 // }
 
 class TicketDetailsContainer extends React.PureComponent {
-  // state = {
-  //   editMode: false
-  // }
+  state = {
+    editMode: false
+  }
 
   componentDidMount() {
-    this.props.loadTicket(this.props.match.params.id)
-    console.log(this.props.match.params.id)
-    const ticketId = Number(this.props.match.params.id)
-    console.log(ticketId)
-    const currentTicket = this.props.ticketData
-    function findUserByTicketId(id) {
-          var i;
-          for (i = 0; i < currentTicket.length; i++) {
-            if (currentTicket[i]['id'] === id)
-              return currentTicket[i]['user_id']
-          }
-        }
-    const user = findUserByTicketId(ticketId)
-    function findEventByTicketId(id) {
-          var i;
-          for (i = 0; i < currentTicket.length; i++) {
-            if (currentTicket[i]['id'] === id)
-              return currentTicket[i]['event_id']
-          }
-        }
-    const event = findEventByTicketId(ticketId)
-    console.log(event)
-    console.log(user)
-    this.props.getUser(user)
-    this.props.loadEvent(event)
-    this.props.getCommentsByTicket(Number(this.props.match.params.id))
+    if (this.props.ticket === null) return this.props.loadTicket(this.props.match.params.id)
+    const ticketUserId = this.props.ticket.map(ticket => ticket.user_id)
+    return this.props.getUser(ticketUserId[0])
   }
 
   render() {
     console.log(this.props)
-    const ticketId = Number(this.props.match.params.id)
-    if (this.props.currentUser !== null)
-      return(<div>
-              <h1>A ticket by {this.props.user.firstName} {this.props.user.lastName} for {this.props.event.name}</h1>
-              <h2>Comments</h2>
-              <Comments comments={this.props.comments} />
-              <CommentBoxContainer ticketId={this.props.match.params.id} />
-            </div> )
-      return (<div>
-                  <TicketDetails ticket={this.props.ticketData}
-                               onDelete={this.onDelete}
-                               onSubmit={this.onSubmit}
-                               onChange={this.onChange}
-                               onEdit={this.onEdit}
-                               editMode={this.state.editMode}
-                               formValues={this.state.formValues}
-
-                            />
-                <p> Interested in this ticket and a Uber-ride 2 the venue?
-                <br />
-                <Link to={`/sign up`}>Sign up</Link> and <Link to={'/login'}>login</Link> to get your Ticket 2 Ride today!</p>
-                  </div>)
+    if (!this.props.ticket || !this.props.user) return 'Loading ticket details'
+    const user = Object.assign({}, this.props.user[0])
+    console.log(user)
+    return (
+      <div>
+      <TicketDetails user={user} ticket={this.props.ticket}/>
+      <h2>Comments</h2>
+      <Comments comments={this.props.comments} />
+      <CommentBoxContainer ticketId={this.props.match.params.id} />
+      </div>)
   }
 }
 
 const mapStateToProps = state => ({
-  ticketData: state.tickets.tickets,
-  comments: state.comments,
-  user: state.users,
-  event: state.event,
-  currentUser: state.currentUser
-})
+    ticket: state.ticket === null ? null: state.ticket,
+    authenticated: state.currentUser !== null,
+    user: state.user,
+    profiles: state.profile === null ? null : state.profile,
+    ticketInfo: state.ticketInfo === null ? null : state.ticketInfo
+  })
 
-export default connect(mapStateToProps, {loadTicket, getCommentsByTicket, getUser, loadEvent})(TicketDetailsContainer)
+export default connect(mapStateToProps, {getTicketsByEvent, loadTicket, getUser})(TicketDetailsContainer)

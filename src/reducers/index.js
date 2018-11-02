@@ -4,9 +4,11 @@ import event from './event'
 import comments from './comments'
 import ticket from './ticket'
 import users from './users'
+import user from './user'
 import signup from './signup'
 import currentUser from './currentUser'
 import login from './login'
+import profile from './profile'
 import {reducer as menu} from 'redux-burger-menu'
 
 export default {
@@ -16,7 +18,9 @@ export default {
   ticket,
   comments,
   users,
+  user,
   currentUser,
+  profile,
   login,
   signup,
   menu

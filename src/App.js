@@ -25,7 +25,7 @@ class App extends Component {
             <Route exact path="/signup" component={SignupPage} />
             <Route path="/" exact component={EventsListContainer} />
             <Route exact path="/events/:id" component={EventDetailsContainer} />
-            <Route exact path="/events/:id/tickets/:id" component={TicketDetailsContainer} />
+            <Route exact path="/events/:event_id/tickets/:id" component={TicketDetailsContainer} />
           </main>
           <footer>
             <div className="App-footer">
