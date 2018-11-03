@@ -23,12 +23,11 @@ class TicketDetailsContainer extends React.PureComponent {
   }
 
   componentDidMount() {
-    this.props.loadTicket(Number(this.props.match.params.id))
+    this.props.loadTicket(this.props.match.params.id)
    }
 
   render() {
     console.log(this.props)
-
     if (!this.props.ticket) return 'loading tickets'
     return (
       <div>

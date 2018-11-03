@@ -2,11 +2,9 @@ import * as React from 'react'
 import TicketForm from './TicketForm'
 
 export default function TicketDetails(props) {
-  console.log(props)
-  console.log(ticketProfile)
   if (!props.ticket) return 'loading ticket'
   if (!props.profile) return 'loading profile'
-  const ticketProfile = Object.assign({}, props.profile[0])
+  const ticketProfile = props.profile[0]
 
   return (
     <div>
@@ -16,6 +14,6 @@ export default function TicketDetails(props) {
           <p>A ticket by {ticketProfile.user_name} </p>
           </div>
         )) }
-        {!props.ticket && !ticketProfile && <p>error loading ticket</p>}
+        {!props.ticket && !ticketProfile && <p>Error loading ticket</p>}
     </div>)
 }

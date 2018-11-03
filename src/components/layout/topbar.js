@@ -7,19 +7,20 @@ import {Link} from 'react-router-dom'
 
 class TopBar extends React.Component {
   render() {
-    if (this.props.currentUser !== null)
+    if (!this.props.currentUser) return (<div>
+        <h1>TICKET 2 RIDE</h1>
+        <p>Welcome guest
+        <br />Please <Link to={'/login'}>login</Link> or <Link to={`/signup`}>sign up</Link></p>
+        <br />
+        </div>)
+
       return (<div>
             <h1>TICKET 2 RIDE</h1>
-            <p>Welcome back, {this.props.currentUser.user.firstName}!</p>
+            <p>Welcome back {this.props.currentUser.user.firstName}!</p>
             <button><Link to={'/'}>Home</Link></button>
             <button><Link to={'/logout'}>Logout</Link></button>
             </div>)
-
-      return (<div>
-          <h1>TICKET 2 RIDE</h1>
-          <p>Welcome, guest please <Link to={'/login'}>login</Link> or <Link to={`/signup`}>sign up</Link></p>
-          </div>)
-  }
+      }
 }
 
 const mapStateToProps = state => ({
