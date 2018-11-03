@@ -1,4 +1,5 @@
 import request from 'superagent'
+import {updateTicketInfo} from './tickets'
 
 export const COMMENTS_FETCHED = 'COMMENTS_FETCHED'
 export const COMMENT_FETCHED = 'COMMENT_FETCHED'
@@ -51,26 +52,27 @@ export const createComment = (data, ticketId) => dispatch => {
     .catch(console.error)
 }
 
-export const loadComments = () => (dispatch, getState) => {
+export const loadComments = (ticketId) => (dispatch, getState) => {
   if (getState().comments) return
 
-  request(`${baseUrl}/comments`)
+  request(`${baseUrl}/tickets/${ticketId}/comments`)
     .then(response => {
-      dispatch(commentsFetched(response.body))
+      dispatch(commentsFetched(response.body.comments))
+      dispatch(updateTicketInfo(response.body.ticketInfo))
     })
     .catch(console.error)
 }
 
-export const loadComment = (id) => (dispatch, getState) => {
-  const state = getState().comment
-  if (state && state.id === id) return
-
-  request(`${baseUrl}/comments/${id}`)
-    .then(response => {
-      dispatch(commentFetched(response.body))
-    })
-    .catch(console.error)
-}
+// export const loadComment = (id) => (dispatch, getState) => {
+//   const state = getState().comment
+//   if (state && state.id === id) return
+//
+//   request(`${baseUrl}/comments/${id}`)
+//     .then(response => {
+//       dispatch(commentFetched(response.body))
+//     })
+//     .catch(console.error)
+// }
 
 export const updateComment = (id, data) => dispatch => {
   request

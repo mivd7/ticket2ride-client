@@ -5,11 +5,11 @@ export default (state = null, {type, payload}) => {
     case TICKETS_FETCHED:
       return payload
 
-    // case UPDATE_TICKETINFO:
-    //   return payload.reduce((infos, info) => {
-    //     infos[info.ticket_id] = info;
-    //     return infos;
-    //   }, {})
+    case UPDATE_TICKETINFO:
+      return payload.reduce((infos, info) => {
+        infos[info.ticket_id] = info;
+        return infos;
+      }, {})
 
     case UPDATE_TICKETS:
       return  payload.reduce((tickets, ticket) => {

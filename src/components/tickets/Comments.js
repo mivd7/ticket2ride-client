@@ -9,6 +9,7 @@ export default function Comments(props) {
           <div>
           <p key={comment.id}>{ comment.message } </ p>
           <li key={comment.id}> {comment.time_of_creation} </li>
+          by {comment.user}
           </div>
         )) }
         { !props.comments && <li>Loading comments...</li> }

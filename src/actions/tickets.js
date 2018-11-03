@@ -39,7 +39,7 @@ const ticketCreateSuccess = ticket => ({
   payload: ticket
 })
 
-const updateTicketInfo = (ticketInfo) => ({
+export const updateTicketInfo = (ticketInfo) => ({
     type: UPDATE_TICKETINFO,
     payload: ticketInfo
 })
@@ -48,6 +48,7 @@ const updateTickets = (tickets) => ({
     type: UPDATE_TICKETS,
     payload: tickets
 })
+
 
 const profileFetched = (profile) => ({
     type: PROFILE_FETCHED,
@@ -80,7 +81,7 @@ export const createTicket = (eventId, description, price, thumbnail) => (dispatc
       .then(result => {
           dispatch(updateTicketInfo(result.body['ticketsInfo']))
           dispatch(ticketCreateSuccess(result.body.ticketPayload)) ;
-          // dispatch(profileFetched(result.body.profilePayload));
+          dispatch(profileFetched(result.body.profilePayload));
         })
       .catch(err => console.error(err))
 }
@@ -110,16 +111,6 @@ export const loadTicket = (id) => (dispatch) => {
     })
     .catch(console.error)
 }
-
-// export const loadProfile = (id) => (dispatch) => {
-//
-//   request
-//     .get(`${baseUrl}/profiles/${id}`)
-//     .then(response => {
-//       dispatch(profileFetched(response.body))
-//     })
-//     .catch(console.error)
-// }
 
 export const updateTicket = (id, data) => (dispatch, getState) => {
   const state = getState();

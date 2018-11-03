@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import TicketDetails from './TicketDetails'
-import Comments from './Comments'
+import CommentsContainer from './CommentsContainer'
 import CommentBoxContainer from './CommentBoxContainer'
 import {loadTicket, loadProfile} from '../../actions/tickets'
 import {getCommentsByTicket} from '../../actions/comments'
@@ -29,11 +29,13 @@ class TicketDetailsContainer extends React.PureComponent {
   render() {
     console.log(this.props)
     if (!this.props.ticket) return 'loading tickets'
+
     return (
       <div>
       <TicketDetails profile={this.props.profile} ticket={this.props.ticket} />
-      <h2>Comments</h2>
-      <Comments comments={this.props.comments} />
+      <CommentsContainer comments={this.props.comments}
+                ticketId={this.props.match.params.id}
+                />
       <CommentBoxContainer ticketId={this.props.match.params.id} />
       </div>)
   }
