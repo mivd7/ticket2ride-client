@@ -14,7 +14,7 @@ class EventDetailsContainer extends React.PureComponent {
 
   componentDidMount() {
     this.props.getTicketsByEvent(this.props.match.params.id)
-    if (this.props.event === null) return this.props.loadEvent(Number(this.props.match.params.id))
+    this.props.loadEvent(this.props.match.params.id)
   }
 
   onDelete = () => {

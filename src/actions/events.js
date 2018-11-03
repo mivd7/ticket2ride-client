@@ -46,7 +46,7 @@ export const loadEvents = () => (dispatch, getState) => {
 }
 
 export const loadEvent = (id) => (dispatch, getState) => {
-  const state = getState().event
+  const state = getState()
   if (state && state.id === id) return
 
   request(`${baseUrl}/events/${id}`)
