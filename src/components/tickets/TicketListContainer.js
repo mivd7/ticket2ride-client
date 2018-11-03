@@ -31,7 +31,7 @@ class TicketsListContainer extends React.PureComponent {
 
 const mapStateToProps =( state ) => ({
   tickets: state.tickets === null ? null : Object.values(state.tickets),
-  profiles: state.Profile === null ? null : state.profile,
+  profiles: state.profile === null ? null : state.profile,
   // ticketsInfo: state.ticketInfo === null ? null : state.ticketInfo
 })
 

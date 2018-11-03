@@ -7,9 +7,10 @@ export const TICKET_FETCHED = 'TICKET_FETCHED'
 export const TICKET_UPDATE_SUCCESS = 'TICKET_UPDATE_SUCCESS'
 export const TICKET_DELETE_SUCCESS = 'TICKET_DELETE_SUCCESS'
 export const TICKET_CREATE_SUCCESS = 'TICKET_CREATE_SUCCESS'
-export const UPDATE_PROFILE = 'UPDATE_PROFILE'
 export const UPDATE_TICKETINFO = 'UPDATE_TICKETINFO'
 export const UPDATE_TICKETS = 'UPDATE_TICKETS'
+
+export const PROFILE_FETCHED = 'PROFILE_FETCHED'
 
 const baseUrl = 'http://localhost:4000'
 
@@ -38,11 +39,6 @@ const ticketCreateSuccess = ticket => ({
   payload: ticket
 })
 
-const updateProfile = (profile) => ({
-    type: UPDATE_PROFILE,
-    payload: profile
-});
-
 const updateTicketInfo = (ticketInfo) => ({
     type: UPDATE_TICKETINFO,
     payload: ticketInfo
@@ -53,14 +49,18 @@ const updateTickets = (tickets) => ({
     payload: tickets
 })
 
+const profileFetched = (profile) => ({
+    type: PROFILE_FETCHED,
+    profile
+})
+
 export const getTicketsByEvent = (eventId) => (dispatch) => {
 
     request
         .get(`${baseUrl}/events/${eventId}/tickets`)
         .then(result => {
             dispatch(updateTickets(result.body['tickets']));
-            // dispatch(updateTicketInfo(result.body['ticketInfo']));
-            dispatch(updateProfile(result.body['profile']));
+            dispatch(profileFetched(result.body['profile']));
         })
         .catch(err => console.error(err))
 
@@ -80,7 +80,7 @@ export const createTicket = (eventId, description, price, thumbnail) => (dispatc
       .then(result => {
           dispatch(updateTicketInfo(result.body['ticketsInfo']))
           dispatch(ticketCreateSuccess(result.body.ticketPayload)) ;
-          dispatch(updateProfile(result.body.profilePayload));
+          // dispatch(profileFetched(result.body.profilePayload));
         })
       .catch(err => console.error(err))
 }
@@ -94,24 +94,32 @@ export const loadTickets = () => (dispatch, getState) => {
   request(`${baseUrl}/tickets/`)
     .set('Authorization', `Bearer ${jwt}`)
     .then(response => {
-      dispatch(ticketsFetched(response.body))
+      dispatch(ticketsFetched(response.body.ticket))
+      dispatch(profileFetched(response.body.profile))
     })
     .catch(console.error)
 }
 
-export const loadTicket = (id) => (dispatch, getState) => {
-  const state = getState();
-  if (!state.currentUser) return null;
-  const jwt = state.currentUser.jwt;
-  if (isExpired(jwt)) return dispatch(logout());
+export const loadTicket = (id) => (dispatch) => {
 
-  request(`${baseUrl}/tickets/${id}`)
-    .set('Authorization', `Bearer ${jwt}`)
+  request
+    .get(`${baseUrl}/tickets/${id}`)
     .then(response => {
-      dispatch(ticketFetched(response.body))
+      dispatch(ticketFetched(response.body['ticket']))
+      dispatch(profileFetched(response.body['profile']))
     })
     .catch(console.error)
 }
+
+// export const loadProfile = (id) => (dispatch) => {
+//
+//   request
+//     .get(`${baseUrl}/profiles/${id}`)
+//     .then(response => {
+//       dispatch(profileFetched(response.body))
+//     })
+//     .catch(console.error)
+// }
 
 export const updateTicket = (id, data) => (dispatch, getState) => {
   const state = getState();

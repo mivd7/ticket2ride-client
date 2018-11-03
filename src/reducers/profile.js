@@ -1,13 +1,12 @@
-const UPDATE_PROFILE = 'UPDATE_PROFILE';
+import {PROFILE_FETCHED} from '../actions/tickets'
 
-export default (state = null, {type, payload}) => {
-  switch (type) {
-    case UPDATE_PROFILE:
-        return payload.reduce((profiles, profile) => {
-            profiles[profile.user_id] = profile
-            return profile
-        }, {});
+export default function (state = null, action) {
+  switch(action.type) {
+    case PROFILE_FETCHED:
+      const output = Object.assign({}, action.profile)
+      console.log(output)
+      return output
     default:
-      return state;
+      return state
   }
 }

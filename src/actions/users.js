@@ -96,5 +96,3 @@ export const getUser = (id) => (dispatch) => {
       })
       .catch(console.error)
   }
-
-//set user voert middels een connectie met Socket IO

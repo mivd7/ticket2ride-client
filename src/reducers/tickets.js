@@ -22,7 +22,6 @@ export default (state = null, {type, payload}) => {
         ...state,
         [payload.id]: payload
       }
-
     default:
       return state
     }

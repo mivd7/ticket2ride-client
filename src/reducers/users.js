@@ -1,6 +1,4 @@
-import {ADD_USER, UPDATE_USERS} from '../actions/users'
-import {USER_LOGOUT} from '../actions/users'
-
+import {ADD_USER, UPDATE_USERS, USER_LOGOUT, PROFILE_FETCHED} from '../actions/users'
 /*
 The state will contain the users in an object with the game ID as key
 */
@@ -25,7 +23,7 @@ export default (state = {}, {type, payload}) => {
         users[user.id] = user
         return users
       }, {})
-
+      
     default:
       return state
   }
