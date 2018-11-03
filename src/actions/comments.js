@@ -1,8 +1,9 @@
 import request from 'superagent'
 import {updateTicketInfo} from './tickets'
+import {isExpired} from '../auth/jwt'
+import {logout} from './users'
 
 export const COMMENTS_FETCHED = 'COMMENTS_FETCHED'
-export const COMMENT_FETCHED = 'COMMENT_FETCHED'
 export const COMMENT_UPDATE_SUCCESS = 'COMMENT_UPDATE_SUCCESS'
 export const COMMENT_DELETE_SUCCESS = 'COMMENT_DELETE_SUCCESS'
 export const COMMENT_CREATE_SUCCESS = 'COMMENT_CREATE_SUCCESS'
@@ -12,11 +13,6 @@ const baseUrl = 'http://localhost:4000'
 const commentsFetched = comments => ({
   type: COMMENTS_FETCHED,
   comments
-})
-
-const commentFetched = comment => ({
-  type: COMMENT_FETCHED,
-  comment
 })
 
 const commentUpdateSuccess = comment => ({
@@ -34,8 +30,14 @@ const commentCreateSuccess = comment => ({
   comment
 })
 
-export const getCommentsByTicket = (ticketId) => dispatch => {
+export const getCommentsByTicket = (ticketId) => (dispatch, getState) => {
+  const state = getState();
+  if (!state.currentUser) return null;
+  const jwt = state.currentUser.jwt;
+  if (isExpired(jwt)) return dispatch(logout())
+
   request(`${baseUrl}/tickets/${ticketId}/comments`)
+    .set('Authorization', `Bearer ${jwt}`)
     .then(response => {
       dispatch(commentsFetched(response.body))
     })

@@ -1,11 +1,9 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
 import TicketDetails from './TicketDetails'
 import CommentsContainer from './CommentsContainer'
 import CommentBoxContainer from './CommentBoxContainer'
-import {loadTicket, loadProfile} from '../../actions/tickets'
-import {getCommentsByTicket} from '../../actions/comments'
+import {loadTicket} from '../../actions/tickets'
 
 // const riskToColors = (risk) => {
 //   if(risk < 35) {

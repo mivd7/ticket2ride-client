@@ -16,7 +16,7 @@ class CommentsContainer extends React.PureComponent {
   render() {
     console.log(this.props)
     if (!this.props.ticket) return 'loading tickets'
-    if (!this.props.comments) return 'loading comments'
+    if (!this.props.currentUser) return <p><Link to='/login'>login</Link> to view comments</p>
     return (<div>
       <h2>Comments</h2>
       <Comments comments={this.props.comments} />
@@ -26,7 +26,8 @@ class CommentsContainer extends React.PureComponent {
 
 const mapStateToProps = state => ({
     comments: state.comments,
-    ticket: state.ticket === null ? null: state.ticket
+    ticket: state.ticket === null ? null: state.ticket,
+    currentUser: state.currentUser
   })
 
 export default connect(mapStateToProps, {loadComments})(CommentsContainer)
