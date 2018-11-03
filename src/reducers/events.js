@@ -6,7 +6,7 @@ export default function (state = null, action) {
       return action.events
 
     case EVENT_CREATE_SUCCESS:
-      return [action.event, ...state]
+      return [...state, action.event]
 
     case EVENT_DELETE_SUCCESS:
       return state && state.filter(event => event.id !== action.eventId)
